@@ -1,0 +1,16 @@
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/settings/
+
+background: /images/bg.jpg
+layout:
+
+  Actions:
+    header: false
+    columns: 3
+    style: row
+
+  Web:
+    columns: 3
+    style: row
+
+title: example.com

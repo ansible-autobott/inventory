@@ -1,0 +1,44 @@
+---
+#============================================================================================================
+# Ansible internal
+#============================================================================================================
+# This are ansible specific variables that need to be present
+ansible_become_pass:  "{{ secrets.ans_sudo_pw }}"
+ansible_user: "{{ autobott_enroll.user }}"
+
+#============================================================================================================
+# Enroll system
+#============================================================================================================
+autobott_enroll:
+  # Ansible login user
+  user: ans
+  # used by ansible to escalate to root once logged in this is defined when we enroll the system
+  passwd:  "{{ secrets.ans_sudo_pw }}"
+  # User keys allowed to login as ansible admin, thus run ansible playbook
+  ssh_keys:
+    - "ssh-ed25519 AAAAC3NzaC... demo@myMachne"
+
+#============================================================================================================
+# Linux apt
+#============================================================================================================
+run_role_linux_apt: true
+linux_apt:
+  release: "bookworm"
+  use_contrib: true
+  use_nonfree: false
+  use_backports: true
+  automatic_updates: true # setting this to yes will make the vagrant task to fail because of lock on dpkg
+
+#============================================================================================================
+# Linux Basics
+#============================================================================================================
+run_role_linux_basic: true
+linux_basic:
+  cron_email: "me@example.com"
+  packages:
+    host_defined:
+      - htop
+      - btop
+  hostname: "example.com"
+
+
