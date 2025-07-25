@@ -31,6 +31,22 @@ vhosts:
         proxy_url: "http://127.0.0.1:9031"
         internal_ssl: true
 
+      # Docmost ============================
+      - enabled: true
+        domains:
+          - "https://wiki.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:3030"
+        internal_ssl: true
+
+      # Mealie ============================
+      - enabled: true
+        domains:
+          - "https://meals.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:9925"
+        internal_ssl: true
+
 
   - name: servarr
     enabled: true

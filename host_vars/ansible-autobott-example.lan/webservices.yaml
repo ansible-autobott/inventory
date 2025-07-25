@@ -20,3 +20,18 @@ run_role_homepage: True
 homepage:
   allowed_host: ansible-autobott-example.lan
 
+#============================================================================================================
+# Docmost
+#============================================================================================================
+run_role_docmost: true
+docmost:
+  app_url: "https://wiki.ansible-autobott-example.lan"
+  db_pass: "changeMe"
+  app_secret: "REPLACE_WITH_LONG_SECRET_REPLACE_WITH_LONG_SECRET_"
+
+#============================================================================================================
+# Mealie
+#============================================================================================================
+run_role_mealie: true
+mealie:
+  base_url: https://meals.ansible-autobott-example.lan
