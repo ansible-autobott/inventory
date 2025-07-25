@@ -41,8 +41,18 @@ linux_basic:
       - btop
   hostname: "ansible-autobott-example"
 
+  ssh:
+    sftp_jails:
+      - group_name: sftp
+        jail_dir: "/vhosts"
+        start_dir: "/home_dir" # optional, allows to define the default starting dir when opening a session
+        umask: "0037"            # change the umask parameter of the jail default is 0037 creates files as 0750
+        allow_password: true
+        remove: false # set to true to remove the sftp jail config
+
   groups:
     - name: smbmedia
+    - name: sftp
 
   system_users:
     - username: "smbmedia"

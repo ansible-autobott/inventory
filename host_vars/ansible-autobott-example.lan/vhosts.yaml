@@ -48,6 +48,26 @@ vhosts:
         internal_ssl: true
 
 
+  - name: demo_php
+    enabled: true
+    comment: "php execution"
+    sample_content: "php"
+    password: "{{ secrets.services.demo_php.user_password }}"
+    groups:
+      - sftp
+    servers:
+      - enabled: true
+        domains:
+          - "https://php.ansible-autobott-example.lan"
+        type: "php"
+        internal_ssl: true
+    php:
+      enabled: yes
+    mariadb:
+      enabled: False
+      password: "{{ secrets.services.demo_php.db_password }}"
+
+
   - name: servarr
     enabled: true
     comment: "servarr services"
