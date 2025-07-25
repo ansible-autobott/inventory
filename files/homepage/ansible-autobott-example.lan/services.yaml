@@ -1,0 +1,61 @@
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- Actions:
+    - Logout:
+        href: https://auth.ansible-autobott-example.lan/logout
+
+- Web:
+    - docmost:
+          description: Collaborative Wiki
+          href: https://wiki.ansible-autobott-example.lan
+          icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/docmost.png
+
+    - mealie:
+        description: Meal recipes
+        href: https://meals.ansible-autobott-example.lan
+        icon: mealie.png
+
+- Media:
+      - Jellyfin:
+            description: Media server
+            href: https://jellyfin.ansible-autobott-example.lan
+            icon: jellyfin.png
+
+      - Kavita:
+            description: Book reader
+            href: https://kavita.ansible-autobott-example.lan
+            icon: kavita.png
+
+- Servarr:
+
+    - Transmission:
+        description: Torrent
+        href: https://transmission.ansible-autobott-example.lan
+        icon: transmission.png
+
+    - Sonarr:
+        description: TV Shows
+        href: https://sonarr.ansible-autobott-example.lan
+        icon: sonarr.png
+
+    - Radarr:
+        description: Movies
+        href: https://radarr.ansible-autobott-example.lan
+        icon: radarr.png
+
+    - Lidarr:
+        description: Music
+        href: https://lidarr.ansible-autobott-example.lan
+        icon: lidarr.png
+
+    - Readarr:
+        description: Audiobooks / eBooks
+        href: https://readarr.ansible-autobott-example.lan
+        icon: readarr.png
+
+    - Prowlarr:
+        description: Indexer manager
+        href: https://prowlarr.ansible-autobott-example.lan
+        icon: prowlarr.png
+

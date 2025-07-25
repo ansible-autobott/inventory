@@ -1,0 +1,137 @@
+#============================================================================================================
+# Main webservices
+#============================================================================================================
+
+# Role execution control
+run_role_vhosts: True
+
+vhosts_config: {}
+
+vhosts:
+
+  - name: main_proxy_service
+    enabled: true
+    comment: "main proxied services"
+    servers:
+
+      # Homepage
+      - type: "proxy"
+        enabled: true
+        domains:
+          - "https://ansible-autobott-example.lan"
+        proxy_url: "http://127.0.0.1:3003"
+        internal_ssl: true
+        authelia: true
+
+      # Authelia
+      - type: "proxy"
+        enabled: true
+        domains:
+          - "https://auth.ansible-autobott-example.lan"
+        proxy_url: "http://127.0.0.1:9031"
+        internal_ssl: true
+
+
+  - name: servarr
+    enabled: true
+    comment: "servarr services"
+    servers:
+      # Jellyfin ============================
+      - enabled: true
+        domains:
+          - "https://jellyfin.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:8096"
+        internal_ssl: true
+
+      # Kavita =============================
+      - enabled: true
+        domains:
+          - "https://kavita.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:5000"
+        internal_ssl: true
+
+      # Transmission =======================
+      - enabled: true
+        domains:
+          - "https://transmission.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:9091"
+        internal_ssl: true
+        authelia: true
+        proxy_lines:
+          - header_up Authorization "Basic {{ ( 'torrent:' ~ secrets.services.transmission.password ) | b64encode }}"
+
+      # Prowlarr ===========================
+      - enabled: true
+        domains:
+          - "https://prowlarr.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:9696"
+        internal_ssl: true
+
+      # Lidarr =============================
+      - enabled: true
+        domains:
+          - "https://lidarr.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:8686"
+        internal_ssl: true
+
+      # Radarr =============================
+      - enabled: true
+        domains:
+          - "https://radarr.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:7878"
+        internal_ssl: true
+
+      # Readarr ============================
+      - enabled: true
+        domains:
+          - "https://readarr.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:8787"
+        internal_ssl: true
+
+      # Sonarr =============================
+      - enabled: true
+        domains:
+          - "https://sonarr.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:8989"
+        authelia: true
+        internal_ssl: true
+
+      # Romm =============================
+      - enabled: true
+        domains:
+          - "https://romm.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:3040"
+        internal_ssl: true
+
+      # Whisparr ===========================
+      - enabled: true
+        domains:
+          - "https://whisparr.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:6969"
+        internal_ssl: true
+
+      # Stash ==============================
+      - enabled: true
+        domains:
+          - "https://stash.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:9999"
+        internal_ssl: true
+
+      # Xbvr ===============================
+      - enabled: true
+        domains:
+          - "https://xbvr.ansible-autobott-example.lan"
+        type: "proxy"
+        proxy_url: "http://127.0.0.1:9997"
+        internal_ssl: true

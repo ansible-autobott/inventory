@@ -16,7 +16,7 @@ autobott_enroll:
   passwd:  "{{ secrets.ans_sudo_pw }}"
   # User keys allowed to login as ansible admin, thus run ansible playbook
   ssh_keys:
-    - "ssh-ed25519 AAAAC3NzaC... demo@myMachne"
+    - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDv0lp74sCQJIrreeyRIFsghhH5696soRK3A0tVs3ZzC ans@autobott"
 
 #============================================================================================================
 # Linux apt
@@ -39,6 +39,27 @@ linux_basic:
     host_defined:
       - htop
       - btop
-  hostname: "example.com"
+  hostname: "ansible-autobott-example"
 
+  groups:
+    - name: smbmedia
+
+  system_users:
+    - username: "smbmedia"
+      enabled: true
+      name: "shared samba media"
+      groups: ["smbmedia"]
+      uid: 800
+      gid: 800
+
+  users:
+    - username: jsmith
+      enabled: true
+      delete_home: false
+      uid: 2002
+      name: "The Doctor"
+      primary_group: "users"
+      groups: ["sudo" ]
+      password: "{{ secrets.users.jsmith.password}}"
+      shell: /bin/bash # optional
 

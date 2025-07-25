@@ -13,4 +13,12 @@ layout:
     columns: 3
     style: row
 
-title: example.com
+  Media:
+    columns: 3
+    style: row
+
+  Servarr:
+    columns: 3
+    style: row
+
+title: ansible-autobott-example.lan

@@ -1,0 +1,70 @@
+---
+#============================================================================================================
+# Tailscale
+#============================================================================================================
+run_role_tailscale: False
+
+#============================================================================================================
+# Docker
+#============================================================================================================
+run_role_docker: True
+docker:
+  expose_metrics: true
+  users: [] # users added to the docker group
+
+
+#============================================================================================================
+# Samba
+#============================================================================================================
+run_role_samba: true
+samba:
+  shares:
+    - name: "torrents"
+      comment: "Download dir"
+      path: "/media/torrent"
+
+      share_owner: "smbmedia"
+      share_group:  "smbmedia"
+      share_mode: "2770" # 2xxx sets the setgid bit, to ensure created files and dirs Inherit the group of the parent directory
+
+      force_user: "smbmedia"
+      force_group: "smbmedia"
+      create_mode: "0660"
+      force_create_mode: "0660"
+      directory_mode: "0770"
+      force_directory_mode: "0770"
+
+      valid_users:
+        - "@smbmedia"
+      write_list:
+        - "@smbmedia"
+
+    - name: "media"
+      comment: "A shared folder"
+      path: "/media/shared_movies"
+
+      share_owner: "smbmedia"
+      share_group:  "smbmedia"
+      share_mode: "2770" # 2xxx sets the setgid bit, to ensure created files and dirs Inherit the group of the parent directory
+
+      force_user: "smbmedia"
+      force_group: "smbmedia"
+      create_mode: "0660"
+      force_create_mode: "0660"
+      directory_mode: "0770"
+      force_directory_mode: "0770"
+
+      valid_users:
+        - "@smbmedia"
+      write_list:
+        - "@smbmedia"
+
+  users:
+    - name: jsmith
+      password: "{{ secrets.users.jsmith.password}}"
+
+
+#============================================================================================================
+# MariaDb (mysql)
+#============================================================================================================
+run_role_mariadb: False
