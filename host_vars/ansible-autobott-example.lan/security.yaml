@@ -6,7 +6,12 @@ run_role_lynis: False
 #============================================================================================================
 # Firewall
 #============================================================================================================
-run_role_firewall: False
+run_role_firewall: True
+firewall:
+  allowed_outbound_tcp:
+    - 22  # ssh used by borg
+    - 465 # used to send emails
+  allow_docker: False
 
 #============================================================================================================
 # Malware scan
@@ -21,7 +26,8 @@ authelia:
 
   secrets:
     # needs to be more than 20 chars
-    storage_encryption_key: "INSECURE_DEMO_ff10bfa787976e1f8eb6e0686edd34e457b7d9f6765ff10bfa787976e1f8eb6e0686edd34e457b7d9f6765"
+    storage_encryption_key: "{{ secrets.services.authelia.storage_key }}"
+    session:  "{{ secrets.services.authelia.session }}"
 
   sites:
     - domain: "ansible-autobott-example.lan"
@@ -61,8 +67,8 @@ authelia:
   users:
     - username: demo
       displayname: "demo"
-      password: "{{ secrets.services.authelia.demo.password }}"
-      salt: "{{ secrets.services.authelia.demo.salt }}"
+      password: "{{ secrets.services.authelia.users.demo.password }}"
+      salt: "{{ secrets.services.authelia.users.demo.salt }}"
       email: "me@example.com"
       groups:
         - homepage
@@ -72,7 +78,8 @@ authelia:
   # smtp config used for notifications, e.g. when enabling 2fa
   # this sample uses a fastmail subscription
   smtp:
-    address: "submissions://{{ secrets.email.address}}:{{ secrets.email.port}}"
+    address: ""
+#    address: "submissions://{{ secrets.email.address}}:{{ secrets.email.port}}"
     timeout: '5s'
     username: "{{ secrets.email.user}}"
     password: "{{ secrets.email.pass}}"
