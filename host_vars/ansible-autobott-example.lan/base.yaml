@@ -69,7 +69,7 @@ linux_basic:
       uid: 2002
       name: "The Doctor"
       primary_group: "users"
-      groups: ["sudo" ]
+      groups: ["sudo","smbmedia" ]
       password: "{{ secrets.users.jsmith.password}}"
       shell: /bin/bash # optional
 

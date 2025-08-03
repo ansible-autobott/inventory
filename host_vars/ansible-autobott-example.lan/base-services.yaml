@@ -19,11 +19,12 @@ docker:
 run_role_samba: true
 samba:
   shares:
+    # TORRENTS =========================
     - name: "torrents"
       comment: "Download dir"
       path: "/media/torrent"
 
-      share_owner: "smbmedia"
+      share_owner: "debian-transmission"
       share_group:  "smbmedia"
       share_mode: "2770" # 2xxx sets the setgid bit, to ensure created files and dirs Inherit the group of the parent directory
 
@@ -39,6 +40,7 @@ samba:
       write_list:
         - "@smbmedia"
 
+    # Media =========================
     - name: "media"
       comment: "A shared folder"
       path: "/media/shared_movies"
@@ -68,3 +70,28 @@ samba:
 # MariaDb (mysql)
 #============================================================================================================
 run_role_mariadb: False
+
+
+#============================================================================================================
+# Borg
+#============================================================================================================
+run_role_borg: true
+
+#============================================================================================================
+# Borgmatic
+#============================================================================================================
+run_role_borgmatic: True
+borgmatic_backups:
+
+  - name: test
+    enabled: true
+    encryption_passphrase: "demo"
+
+    destination:
+      - path: /var/local_borg_backup
+        label: local
+        encryption: repokey
+
+    dirs:
+      - root: /opt/authelia/data
+    schedule: "monthly"   # daily | weekly | monthly | none
